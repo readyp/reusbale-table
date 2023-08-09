@@ -16,7 +16,7 @@ const Table: React.FC<Props> = ({ source }) => {
   const [trigger, { data, isFetching }] = useLazyGetPostsQuery();
 
   useEffect(() => {
-    trigger(source);
+    trigger(source + "?limit=10&skip=0");
   }, [source]);
 
   if (!data || isFetching) {
@@ -64,8 +64,8 @@ const Table: React.FC<Props> = ({ source }) => {
           </thead>
           <tbody>{tableBody}</tbody>
         </table>
-        {/* Pagination */}
-        <div className="tw-flex tw-justify-end tw-space-x-4 mb-8">
+        {/* Simple Pagination */}
+        <div className="tw-flex tw-flex-wrap tw-gap-4 tw-justify-end mb-8">
           {Array(Math.ceil(data.total / data.limit))
             .fill(0)
             .map((_, index) => (
@@ -74,7 +74,7 @@ const Table: React.FC<Props> = ({ source }) => {
                   index === data.skip / data.limit && "button-primary"
                 }`}
                 onClick={() =>
-                  trigger(`${source}?limit=30&skip=${index * data.limit}`)
+                  trigger(`${source}?limit=10&skip=${index * data.limit}`)
                 }
                 key={index}
               >
