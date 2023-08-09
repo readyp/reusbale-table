@@ -10,6 +10,11 @@ interface Props {
 }
 
 const Table: React.FC<Props> = ({ source }) => {
+  /*
+   * for debugging purpose only;
+   * using lazy queries
+   * it make easier to make request different endpoint
+   */
   const arrayNames = source.split("/");
   const tableContent = arrayNames[arrayNames.length - 1];
   // const { data, isFetching } = useGetPostsQuery(source);

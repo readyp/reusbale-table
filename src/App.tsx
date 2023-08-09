@@ -7,6 +7,7 @@ interface Props {}
 const App: React.FC<Props> = () => {
   /*
    * for debugging purpose only;
+   * using lazy queries
    * it make easier to make request different endpoint
    */
   const [url, setUrl] = useState<string>("https://dummyjson.com/posts");
