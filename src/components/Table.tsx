@@ -13,11 +13,19 @@ const Table: React.FC<Props> = ({ source }) => {
   const arrayNames = source.split("/");
   const tableContent = arrayNames[arrayNames.length - 1];
   // const { data, isFetching } = useGetPostsQuery(source);
-  const [trigger, { data, isFetching }] = useLazyGetPostsQuery();
+  const [trigger, { data, isFetching, isError }] = useLazyGetPostsQuery();
 
   useEffect(() => {
     trigger(source + "?limit=10&skip=0");
   }, [source]);
+
+  if (isError) {
+    return (
+      <h3 className="heading-mega tw-text-red-500 tw-text-center">
+        Error, Check your endpoint
+      </h3>
+    );
+  }
 
   if (!data || isFetching) {
     return <p>Loading...</p>;
